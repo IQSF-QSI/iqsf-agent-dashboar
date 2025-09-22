@@ -1,3 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_KEY);
-export default supabase;
+// Legacy shim -> use the browser helper
+"use client";
+const { supabaseBrowser } = require("./lib/supabase-browser");
+module.exports = { supabaseBrowser };

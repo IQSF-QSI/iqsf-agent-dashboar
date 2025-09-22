@@ -1,0 +1,39 @@
+import React, { useMemo, useEffect, useState } from 'react';
+import { supabaseBrowser } from '../lib/supabase-browser';
+
+export default function ActivityLogPage() {
+  const supabase = useMemo(() => supabaseBrowser(), []);
+  const [rows, setRows] = useState<unknown[]>([]);
+  const [err, setErr] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { data, error } = await supabase
+          .from('activity_log') // TODO: replace with your real table/view
+          .select('*')
+          .limit(50);
+        if (!cancelled) {
+          if (error) throw error;
+          setRows(data ?? []);
+        }
+      } catch (e: unknown) {
+        const msg = e instanceof Error ? e.message : String(e);
+        if (!cancelled) setErr(msg);
+        console.error('Activity log fetch failed:', e);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [supabase]);
+
+  return (
+    <main style={{ padding: 24, fontFamily: 'system-ui' }}>
+      <h1>Activity Log</h1>
+      {err && <p style={{ color: 'crimson' }}>Error: {err}</p>}
+      <pre style={{ whiteSpace: 'pre-wrap', background: '#f6f6f6', padding: 12, borderRadius: 8 }}>
+        {JSON.stringify(rows, null, 2)}
+      </pre>
+    </main>
+  );
+}
