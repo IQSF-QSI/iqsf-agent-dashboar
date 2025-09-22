@@ -7,7 +7,10 @@ export default function BrandLogo() {
       alt="IQSF Shield"
       width={120}
       height={120}
-      style={{ borderRadius: '12px', boxShadow: '0 0 12px #ff4fd8' }}
+      style={{
+        borderRadius: '12px',
+        boxShadow: '0 0 12px #ff4fd8'
+      }}
       priority
     />
   );
