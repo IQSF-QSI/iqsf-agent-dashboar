@@ -1,0 +1,12 @@
+.dashboard {
+  font-family: Arial, serif;
+  color: #3a2486;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 8px #bbb;
+  padding: 2rem;
+  margin: 2rem;
+}
+.badge-info { background: #ff4fd8; color: #fff; padding: 2px 8px; border-radius: 9px; margin-right: 7px;}
+.badge-research { background: #3a2486; color: #fff; padding: 2px 8px; border-radius: 9px; margin-right: 7px;}
+h1 { font-weight: 700; margin-bottom: 18px; }
